@@ -187,7 +187,6 @@ class ParsePipeline:
             return PipelineResult(
                 parse_result=parse_result, processed_list=processed_list, output_dir=download_result.output_dir
             )
-
         maybe_processed_list = await self._step(
             "媒体处理",
             lambda: process_media_files(download_result),

@@ -78,8 +78,8 @@ class MediaProcessingUnit:
 
         try:
             if needs_convert:
-                self.logger(f"图片格式需转换: {ext} -> webp")
-                source = await asyncio.to_thread(self._img2webp, file_path)
+                self.logger(f"图片格式需转换: {ext} -> png")
+                source = await asyncio.to_thread(self._img2png, file_path)
                 intermediates.append(source)
             else:
                 source = file_path
@@ -134,11 +134,11 @@ class MediaProcessingUnit:
             self.logger(f"长图切割: segments={segments}, seg_h={seg_h}")
             return self._split_image(file_path, seg_h)
 
-    def _img2webp(self, file_path: Path) -> Path:
+    def _img2png(self, file_path: Path) -> Path:
         with Image.open(file_path) as pil_img:
             img = pil_img.convert("RGBA") if pil_img.mode != "RGBA" else pil_img
-            output = self.output_dir / file_path.with_suffix(".webp").name
-            img.save(output, format="WEBP")
+            output = self.output_dir / file_path.with_suffix(".png").name
+            img.save(output, format="PNG")
         self.logger(f"webp 转换完成: {output}")
         return output
 

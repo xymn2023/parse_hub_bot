@@ -89,7 +89,7 @@ class MessageStatusReporter(StatusReporter):
     async def report_error(self, stage: str, error: Exception) -> None:
         text = self._t(f"**▎{stage}错误:** \n```\n{error}```")
         if bs.demo_mode:
-            text += self._t('\n\n**问题反馈: @MisakaSisters**')
+            text += self._t("\n\n**问题反馈: @MisakaSisters**")
         await self._edit_text(
             text,
             link_preview_options=LinkPreviewOptions(is_disabled=True),
