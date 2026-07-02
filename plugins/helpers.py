@@ -25,12 +25,34 @@ COMMANDS = {
     "jx": t_("解析"),
     "raw": t_("不处理媒体, 发送原始文件"),
     "zip": t_("不处理媒体, 保存解析结果, 发送压缩包"),
+    "jxjx": t_("绕过缓存解析"),
     "lang": t_("选择语言"),
     "mode": t_("设置默认解析模式"),
     "switches": t_("其他功能开关"),
     "switch_auto_delete": t_("启用/禁用 自动删除分享链接消息"),
     "switch_platform": t_("启用/禁用 平台解析"),
 }
+
+
+def build_start_text() -> LocaleContent:
+    return t_(
+        f"**发送分享链接以进行解析**\n\n"
+        f"**支持的平台:**\n"
+        f"<blockquote expandable>{get_supported_platforms()}</blockquote>\n\n"
+        f"**命令列表:**\n"
+        f"<blockquote expandable>"
+        f"/jx <链接> - 解析并发送媒体\n"
+        f"/raw <链接> - 不处理媒体, 发送原始文件\n"
+        f"/zip <链接> - 不处理媒体, 保存解析结果, 发送压缩包\n"
+        f"/jxjx <链接> - 绕过缓存解析并发送媒体\n"
+        f"/lang - 选择语言\n"
+        f"/mode - 设置默认解析模式\n"
+        f"/switches - 其他功能开关\n"
+        f"/switch_auto_delete - 启用/禁用 自动删除分享链接消息\n"
+        f"/switch_platform - 启用/禁用 平台解析\n"
+        f"</blockquote>\n\n"
+        f"**开源地址: [GitHub](https://github.com/z-mio/parse_hub_bot)**"
+    )
 
 
 @dataclass
@@ -149,24 +171,3 @@ def get_supported_platforms() -> str:
         text.append(f"**{i['name']}** __({'__, __'.join(i['supported_types'])})__")
     text.sort(reverse=True)
     return "\n".join(text)
-
-
-def build_start_text() -> LocaleContent:
-    return t_(
-        f"**发送分享链接以进行解析**\n\n"
-        f"**支持的平台:**\n"
-        f"<blockquote expandable>{get_supported_platforms()}</blockquote>\n\n"
-        f"**命令列表:**\n"
-        f"<blockquote expandable>"
-        f"/jx <链接> - 解析并发送媒体\n"
-        f"/raw <链接> - 不处理媒体, 发送原始文件\n"
-        f"/zip <链接> - 不处理媒体, 保存解析结果, 发送压缩包\n"
-        f"/jxjx <链接> - 绕过缓存解析并发送媒体\n"
-        f"/lang - 选择语言\n"
-        f"/mode - 设置默认解析模式\n"
-        f"/switches - 其他功能开关\n"
-        f"/switch_auto_delete - 启用/禁用 自动删除分享链接消息\n"
-        f"/switch_platform - 启用/禁用 平台解析\n"
-        f"</blockquote>\n\n"
-        f"**开源地址: [GitHub](https://github.com/z-mio/parse_hub_bot)**"
-    )
