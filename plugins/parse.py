@@ -214,6 +214,9 @@ async def _handle_parse_request(
         )
     except ParseRateLimitExceeded as e:
         if e.should_notify:
+            logger.warning(
+                f"速率限制 {e.retry_after:.1f}s, chat_id={msg.chat.id if msg.chat else None}, msg_id={msg.id}"
+            )
             text = _t(f"**▎解析过于频繁, 请在 {e.retry_after:.1f}s 后重试**")
             if bs.demo_mode:
                 text += _t(
