@@ -34,6 +34,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup as Ikm,
 )
 
+from core import bs
 from db import get_session
 from i18n import t_
 from log import logger
@@ -81,9 +82,12 @@ class InlineStatusReporter(StatusReporter):
             pass
 
     async def report_error(self, stage: str, error: Exception) -> None:
+        text = self._t(f"**▎{stage}错误:** \n```\n{error}```")
+        if bs.demo_mode:
+            text += self._t('\n\n**问题反馈: @MisakaSisters**')
         await self._cli.edit_inline_text(
             self._mid,
-            self._t(f"**▎{stage}错误:** \n```\n{error}```"),
+            text,
             link_preview_options=LinkPreviewOptions(is_disabled=True),
         )
 
