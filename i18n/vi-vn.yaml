@@ -76,11 +76,13 @@ b8918b19e2a1: '**▎Bật / Tắt phân tích nền tảng**'
 b8a95e74574c: Không xử lý media, gửi file gốc
 c039b80e17dd: Phân tích tổng hợp
 c1ecedab11bc: Gốc
+c2236f70c559: Bypass cache parsing
 d59c948c471c: Đang phân tích...
 d5a73b0c7f2f: Tải lên
 d6fa702190b6: Đặt chế độ phân tích mặc định
 d7146da48b3e: Các công tắc chức năng khác
 d915366ac40b: Không xử lý media, lưu kết quả phân tích, gửi file nén
+da72eb8457df: Hide bottom Source hyperlink
 e67a8324684f: ▎**Cần cấp quyền xóa tin nhắn cho Bot trong nhóm**
 e73189b92dbd: Tùy chọn gửi URL gốc nội tuyến
 ff71243806c8: Chọn ngôn ngữ

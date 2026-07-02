@@ -80,11 +80,13 @@ b8918b19e2a1: '**▎Aktifkan / Nonaktifkan pemrosesan platform**'
 b8a95e74574c: Jangan proses media, kirim file asli
 c039b80e17dd: Pemrosesan agregat
 c1ecedab11bc: Asli
+c2236f70c559: Melewati parsing cache
 d59c948c471c: Sedang memproses...
 d5a73b0c7f2f: Unggah
 d6fa702190b6: Atur mode penguraian default
 d7146da48b3e: Saklar fungsi lainnya
 d915366ac40b: Jangan proses media, simpan hasil proses, kirim paket kompres
+da72eb8457df: Menyembunyikan tautan sumber di bagian bawah
 e67a8324684f: ▎**Penggunaan dalam grup memerlukan izin Bot untuk menghapus pesan**
 e73189b92dbd: Opsi kirim URL asli secara inline
 ff71243806c8: Pilih bahasa
