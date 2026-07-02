@@ -121,10 +121,12 @@ class MessageStatusReporter(StatusReporter):
 
 
 @Client.on_message(
-    filters.command(["jx", "raw", "zip"]) | ((filters.text | filters.caption) & ~via_me_filter & platform_filter(True))
+    filters.command(["jx", "jxjx", "raw", "zip"])
+    | ((filters.text | filters.caption) & ~via_me_filter & platform_filter(True))
 )
 async def jx(cli: Client, msg: Message) -> None:
     mode = "preview"
+    bypass_cache = False
     lang = None
     user_config = UserConfig()
 
@@ -143,6 +145,9 @@ async def jx(cli: Client, msg: Message) -> None:
                 mode = "raw"
             case "jx":
                 mode = "preview"
+            case "jxjx":
+                mode = "preview"
+                bypass_cache = True
             case "zip":
                 mode = "zip"
 
@@ -169,6 +174,7 @@ async def jx(cli: Client, msg: Message) -> None:
             url=url,
             mode=mode,
             delete_share_url_msg=user_config.auto_delete_url,
+            bypass_cache=bypass_cache,
             _t=_t,
             user_config=user_config,
         )
@@ -191,12 +197,20 @@ async def _handle_parse_request(
     url: str,
     mode: Literal["raw", "preview", "zip"] | str = "preview",
     delete_share_url_msg: bool = False,
+    bypass_cache: bool = False,
     _t: PreLocaleSelector,
     user_config: UserConfig,
 ) -> None:
     try:
         await handle_parse(
-            cli, msg, url=url, mode=mode, delete_share_url_msg=delete_share_url_msg, _t=_t, user_config=user_config
+            cli,
+            msg,
+            url=url,
+            mode=mode,
+            delete_share_url_msg=delete_share_url_msg,
+            bypass_cache=bypass_cache,
+            _t=_t,
+            user_config=user_config,
         )
     except ParseRateLimitExceeded as e:
         if e.should_notify:
@@ -227,11 +241,14 @@ async def handle_parse(
     url: str,
     mode: Literal["raw", "preview", "zip"] | str = "preview",
     delete_share_url_msg: bool = False,
+    bypass_cache: bool = False,
     _t: PreLocaleSelector,
     user_config: UserConfig,
 ) -> None:
     chat_id = msg.chat.id if msg.chat else None
     logger.info(f"收到解析请求: url={url}, chat_id={chat_id}, msg_id={msg.id}, mode={mode}")
+    if bypass_cache:
+        logger.debug("bypass_cache=True 绕过缓存")
     if delete_share_url_msg:
         logger.debug(f"自动删除分享链接消息: chat_id={chat_id}, msg_id: {msg.id}")
         try:
@@ -254,7 +271,7 @@ async def handle_parse(
         case _:
             use_caching = True
             skip_media_processing = False
-            singleflight = True
+            singleflight = not bypass_cache
             save_metadata = False
     try:
         raw_url = await ParseService().get_raw_url(url)
@@ -262,12 +279,12 @@ async def handle_parse(
         await reporter.report_error(_t("获取原始链接"), e)
         return
 
-    if use_caching and (cached := await persistent_cache.get(raw_url)):
+    if use_caching and not bypass_cache and (cached := await persistent_cache.get(raw_url)):
         logger.debug("file_id 缓存命中, 直接发送")
         await _send_cached(msg, cached, raw_url)
         return
 
-    cached_parse_result = await parse_cache.get(raw_url)
+    cached_parse_result = None if bypass_cache else await parse_cache.get(raw_url)
     pipeline = ParsePipeline(
         url,
         reporter,
@@ -282,10 +299,18 @@ async def handle_parse(
     if (result := await pipeline.run()) is None:
         if pipeline.waited:
             logger.debug("Singleflight 等待完成, 重新检查缓存")
-            if cached := await persistent_cache.get(raw_url):
+            if not bypass_cache and (cached := await persistent_cache.get(raw_url)):
                 await _send_cached(msg, cached, raw_url)
             else:
-                await handle_parse(cli, msg, url=url, mode=mode, _t=_t, user_config=user_config)
+                await handle_parse(
+                    cli,
+                    msg,
+                    url=url,
+                    mode=mode,
+                    bypass_cache=bypass_cache,
+                    _t=_t,
+                    user_config=user_config,
+                )
                 return
         else:
             logger.debug("Pipeline 返回 None, 跳过后续处理")

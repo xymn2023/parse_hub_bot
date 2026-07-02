@@ -174,7 +174,7 @@ class ParsePipeline:
             "下载",
             lambda: fn(),
             timeout=60 * 30,  # 30分钟
-            retries=2,
+            # retries=2,
         )
         if download_result is None:
             return None

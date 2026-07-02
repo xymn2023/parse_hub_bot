@@ -161,6 +161,7 @@ def build_start_text() -> LocaleContent:
         f"/jx <链接> - 解析并发送媒体\n"
         f"/raw <链接> - 不处理媒体, 发送原始文件\n"
         f"/zip <链接> - 不处理媒体, 保存解析结果, 发送压缩包\n"
+        f"/jxjx <链接> - 绕过缓存解析并发送媒体\n"
         f"/lang - 选择语言\n"
         f"/mode - 设置默认解析模式\n"
         f"/switches - 其他功能开关\n"
