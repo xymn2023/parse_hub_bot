@@ -70,12 +70,19 @@ def resolve_media_info(processed: "ProcessedMedia", file_path: str) -> tuple[int
     return processed.source.width, processed.source.height, getattr(processed.source, "duration", 0)
 
 
-def build_caption(parse_result: AnyParseResult, telegraph_url: str | None = None) -> str:
-    return build_caption_by_str(parse_result.title, parse_result.content, parse_result.raw_url, telegraph_url)
+def build_caption(parse_result: AnyParseResult, telegraph_url: str | None = None, *, hide_source: bool = False) -> str:
+    return build_caption_by_str(
+        parse_result.title, parse_result.content, parse_result.raw_url, telegraph_url, hide_source=hide_source
+    )
 
 
 def build_caption_by_str(
-    title: str | None, content: str | None, raw_url: str | None, telegraph_url: str | None = None
+    title: str | None,
+    content: str | None,
+    raw_url: str,
+    telegraph_url: str | None = None,
+    *,
+    hide_source: bool = False,
 ) -> str:
     """构建消息正文：标题 + 内容 + 来源链接"""
     title, content = title or "", content or ""
@@ -90,7 +97,7 @@ def build_caption_by_str(
         if content:
             parts.append(content)
         body = format_text("\n\n".join(parts) or "**无标题**")
-    if not raw_url:
+    if hide_source:
         return body
     return f"{body}\n\n<b>▎<a href='{raw_url}'>Source</a></b>"
 

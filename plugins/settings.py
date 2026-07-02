@@ -211,20 +211,31 @@ def build_switches_button(current: AccountContext) -> Ikm:
     config = current.config
     key = "switches"
     _t = t_[current.lang]
+
+    def reply_bool_style(v: bool) -> ButtonStyle:
+        return ButtonStyle.SUCCESS if v else ButtonStyle.DANGER
+
     return Ikm(
         [
             [
                 Ikb(
                     _t("内联发送原始 URL 选项"),
                     callback_data=CQData(key=key, value="enable_inline_raw_url", uid=uid).unparse(),
-                    style=ButtonStyle.SUCCESS if config.enable_inline_raw_url else ButtonStyle.DANGER,
+                    style=reply_bool_style(config.enable_inline_raw_url),
                 ),
                 Ikb(
                     _t("保留错误日志"),
                     callback_data=CQData(key=key, value="keep_error_log", uid=uid).unparse(),
-                    style=ButtonStyle.SUCCESS if config.keep_error_log else ButtonStyle.DANGER,
+                    style=reply_bool_style(config.keep_error_log),
                 ),
-            ]
+            ],
+            [
+                Ikb(
+                    _t("隐藏底部 Source 超链接"),
+                    callback_data=CQData(key=key, value="hide_source", uid=uid).unparse(),
+                    style=reply_bool_style(config.hide_source),
+                ),
+            ],
         ]
     )
 
@@ -261,5 +272,7 @@ async def switches_callback(_: Client, cq: CallbackQuery) -> None:
                 current = await account.patch_config(enable_inline_raw_url=not config.enable_inline_raw_url)
             case "keep_error_log":
                 current = await account.patch_config(keep_error_log=not config.keep_error_log)
+            case "hide_source":
+                current = await account.patch_config(hide_source=not config.hide_source)
 
     await cq.message.edit_reply_markup(reply_markup=build_switches_button(current))

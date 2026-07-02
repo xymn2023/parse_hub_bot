@@ -281,7 +281,7 @@ async def handle_parse(
 
     if use_caching and not bypass_cache and (cached := await persistent_cache.get(raw_url)):
         logger.debug("file_id 缓存命中, 直接发送")
-        await _send_cached(msg, cached, raw_url)
+        await _send_cached(msg, cached, raw_url, user_config=user_config)
         return
 
     cached_parse_result = None if bypass_cache else await parse_cache.get(raw_url)
@@ -300,7 +300,7 @@ async def handle_parse(
         if pipeline.waited:
             logger.debug("Singleflight 等待完成, 重新检查缓存")
             if not bypass_cache and (cached := await persistent_cache.get(raw_url)):
-                await _send_cached(msg, cached, raw_url)
+                await _send_cached(msg, cached, raw_url, user_config=user_config)
             else:
                 await handle_parse(
                     cli,
@@ -326,7 +326,7 @@ async def handle_parse(
             await msg.reply_chat_action(enums.ChatAction.TYPING)
             ph_url = await create_richtext_telegraph(cli, parse_result)
             logger.debug(f"Telegraph 页面创建完成: {ph_url}")
-            caption = build_caption(parse_result, ph_url)
+            caption = build_caption(parse_result, ph_url, hide_source=user_config.hide_source)
             await msg.reply_text(
                 caption,
                 link_preview_options=LinkPreviewOptions(show_above_text=True),
@@ -343,7 +343,7 @@ async def handle_parse(
         finally:
             pipeline.finish()
 
-    caption = build_caption(parse_result)
+    caption = build_caption(parse_result, hide_source=user_config.hide_source)
     if not result.processed_list:
         logger.debug("无媒体文件, 仅发送文本")
         await msg.reply_chat_action(enums.ChatAction.TYPING)
@@ -358,10 +358,10 @@ async def handle_parse(
         return
 
     if mode == "raw":
-        await _send_raw(msg, result, reporter, _t)
+        await _send_raw(msg, result, reporter, _t=_t, user_config=user_config)
         return
     if mode == "zip":
-        await _send_zip(msg, result, reporter, _t)
+        await _send_zip(msg, result, reporter, _t=_t, user_config=user_config)
         return
 
     # ── 上传媒体 ──
@@ -465,13 +465,18 @@ def _make_cache_entry(parse_result: AnyParseResult, media_list: list[CacheMedia]
 
 
 async def _send_raw(
-    msg: Message, result: PipelineResult, reporter: MessageStatusReporter, _t: PreLocaleSelector
+    msg: Message,
+    result: PipelineResult,
+    reporter: MessageStatusReporter,
+    *,
+    _t: PreLocaleSelector,
+    user_config: UserConfig,
 ) -> None:
     """Raw 模式：将文件以原始文档形式上传。"""
     logger.debug("Raw 模式, 直接上传文件")
     await reporter.report(_t("上 传 中..."))
     try:
-        caption = build_caption(result.parse_result)
+        caption = build_caption(result.parse_result, hide_source=user_config.hide_source)
         all_docs: list[InputMediaDocument] = []
         livephoto_videos: dict[int, InputMediaDocument] = {}
 
@@ -525,12 +530,17 @@ async def _send_raw(
 
 
 async def _send_zip(
-    msg: Message, result: PipelineResult, reporter: MessageStatusReporter, _t: PreLocaleSelector
+    msg: Message,
+    result: PipelineResult,
+    reporter: MessageStatusReporter,
+    *,
+    _t: PreLocaleSelector,
+    user_config: UserConfig,
 ) -> None:
     logger.debug("Zip 模式, 开始打包")
     await reporter.report(_t("打 包 中..."))
     try:
-        caption = build_caption(result.parse_result)
+        caption = build_caption(result.parse_result, hide_source=user_config.hide_source)
         if result.output_dir is None:
             raise ValueError("缺少打包目录")
         pack_path = await asyncio.to_thread(pack_dir_to_tar_gz, result.output_dir)
@@ -719,10 +729,16 @@ async def _send_media(
 # ── 缓存发送 ─────────────────────────────────────────────────────────
 
 
-async def _send_cached(msg: Message, entry: CacheEntry, url: str) -> None:
+async def _send_cached(msg: Message, entry: CacheEntry, url: str, *, user_config: UserConfig) -> None:
     """从 file_id 缓存直接发送，跳过解析/下载/转码"""
     logger.debug(f"缓存发送: media={entry.media}")
-    caption = build_caption_by_str(entry.parse_result.title, entry.parse_result.content, url, entry.telegraph_url)
+    caption = build_caption_by_str(
+        entry.parse_result.title,
+        entry.parse_result.content,
+        url,
+        entry.telegraph_url,
+        hide_source=user_config.hide_source,
+    )
 
     # 富文本类型
     if entry.telegraph_url:
