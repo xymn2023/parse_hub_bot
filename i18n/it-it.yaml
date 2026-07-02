@@ -6,6 +6,40 @@
   **'
 30364e475d07: Questa non è la tua operazione
 3065ed13e5f9: Ottieni link originale
+32327b34a026: '**Invia il link di condivisione per l''analisi**
+
+
+  **Piattaforme supportate:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Elenco comandi:**
+
+  <blockquote expandable>/jx <link> - Analizza e invia media
+
+  /raw <link> - Non elabora media, invia file originale
+
+  /zip <link> - Non elabora media, salva il risultato dell''analisi, invia archivio
+  compresso
+
+  /jxjx <link> - Analizza bypassando la cache e invia media
+
+  /lang - Seleziona la lingua
+
+  /mode - Imposta la modalità di analisi predefinita
+
+  /switches - Altri interruttori di funzionalità
+
+  /switch_auto_delete - Abilita/disabilita l''eliminazione automatica del messaggio
+  del link di condivisione
+
+  /switch_platform - Abilita/disabilita l''analisi della piattaforma
+
+  </blockquote>
+
+
+  **Codice sorgente: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Abilita/Disabilita analisi piattaforma
 44a77d4ad4ca: Senza titolo
 460ce129a523: Download in corso...
@@ -48,38 +82,6 @@ b8918b19e2a1: '**▎Abilita / Disabilita analisi piattaforma**'
 b8a95e74574c: Non elaborare i media, invia il file originale
 c039b80e17dd: Analisi aggregata
 c1ecedab11bc: Originale
-cf7e2e342196: '**Invia il link di condivisione per l''analisi**
-
-
-  **Piattaforme supportate:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Elenco comandi:**
-
-  <blockquote expandable>/jx <link> - Analizza e invia media
-
-  /raw <link> - Non elabora media, invia il file originale
-
-  /zip <link> - Non elabora media, salva il risultato dell''analisi, invia un archivio
-  compresso
-
-  /lang - Seleziona la lingua
-
-  /mode - Imposta la modalità di analisi predefinita
-
-  /switches - Altri interruttori di funzionalità
-
-  /switch_auto_delete - Abilita/disabilita l''eliminazione automatica dei messaggi
-  con link di condivisione
-
-  /switch_platform - Abilita/disabilita l''analisi della piattaforma
-
-  </blockquote>
-
-
-  **Codice sorgente: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Analisi in corso...
 d5a73b0c7f2f: Carica
 d6fa702190b6: Imposta la modalità di analisi predefinita

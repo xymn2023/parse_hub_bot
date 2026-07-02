@@ -7,6 +7,40 @@
   **'
 30364e475d07: Ce n'est pas votre action
 3065ed13e5f9: Obtenir le lien original
+32327b34a026: '**Envoyez un lien de partage pour analyse**
+
+
+  **Plateformes prises en charge :**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Liste des commandes :**
+
+  <blockquote expandable>/jx <lien> - Analyser et envoyer le média
+
+  /raw <lien> - Ne pas traiter le média, envoyer le fichier brut
+
+  /zip <lien> - Ne pas traiter le média, enregistrer le résultat de l''analyse, envoyer
+  une archive compressée
+
+  /jxjx <lien> - Contourner le cache, analyser et envoyer le média
+
+  /lang - Choisir la langue
+
+  /mode - Définir le mode d''analyse par défaut
+
+  /switches - Autres options
+
+  /switch_auto_delete - Activer/désactiver la suppression automatique des messages
+  de lien de partage
+
+  /switch_platform - Activer/désactiver l''analyse de la plateforme
+
+  </blockquote>
+
+
+  **Code source : [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Activer/Désactiver l'analyse de la plateforme
 44a77d4ad4ca: Sans titre
 460ce129a523: Téléchargement en cours...
@@ -49,38 +83,6 @@ b8918b19e2a1: '**▎Activer / Désactiver l''analyse de la plateforme**'
 b8a95e74574c: Ne pas traiter les médias, envoyer le fichier original
 c039b80e17dd: Analyse agrégée
 c1ecedab11bc: Original
-cf7e2e342196: '**Envoyez un lien de partage pour analyse**
-
-
-  **Plateformes prises en charge :**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Liste des commandes :**
-
-  <blockquote expandable>/jx <lien> - Analyser et envoyer le média
-
-  /raw <lien> - Ne pas traiter le média, envoyer le fichier brut
-
-  /zip <lien> - Ne pas traiter le média, enregistrer le résultat de l''analyse, envoyer
-  une archive compressée
-
-  /lang - Choisir la langue
-
-  /mode - Définir le mode d''analyse par défaut
-
-  /switches - Autres options
-
-  /switch_auto_delete - Activer/désactiver la suppression automatique des messages
-  de lien de partage
-
-  /switch_platform - Activer/désactiver l''analyse de la plateforme
-
-  </blockquote>
-
-
-  **Code source : [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Analyse en cours...
 d5a73b0c7f2f: Téléverser
 d6fa702190b6: Définir le mode d'analyse par défaut

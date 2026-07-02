@@ -6,6 +6,38 @@
 2b256f16d436: '** ▎{status} auto-deleted shared link messages **'
 30364e475d07: This is not your operation
 3065ed13e5f9: Get original link
+32327b34a026: '**Send share link for parsing**
+
+
+  **Supported platforms:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Command list:**
+
+  <blockquote expandable>/jx <link> - Parse and send media
+
+  /raw <link> - Do not process media, send original file
+
+  /zip <link> - Do not process media, save parsing result, send compressed package
+
+  /jxjx <link> - Bypass cache to parse and send media
+
+  /lang - Select language
+
+  /mode - Set default parsing mode
+
+  /switches - Other feature toggles
+
+  /switch_auto_delete - Enable/disable auto-delete of share link messages
+
+  /switch_platform - Enable/disable platform parsing
+
+  </blockquote>
+
+
+  **Open source: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Enable/Disable Platform Parsing
 44a77d4ad4ca: Untitled
 460ce129a523: Downloading...
@@ -45,36 +77,6 @@ b8918b19e2a1: '**▎Enable / Disable Platform Parsing**'
 b8a95e74574c: Do not process media, send original file
 c039b80e17dd: Aggregate Parsing
 c1ecedab11bc: Original
-cf7e2e342196: '**Send the share link for parsing**
-
-
-  **Supported platforms:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Command list:**
-
-  <blockquote expandable>/jx <link> - Parse and send media
-
-  /raw <link> - Do not process media, send original file
-
-  /zip <link> - Do not process media, save parsing results, send compressed package
-
-  /lang - Select language
-
-  /mode - Set default parsing mode
-
-  /switches - Other feature toggles
-
-  /switch_auto_delete - Enable/disable auto-delete of share link messages
-
-  /switch_platform - Enable/disable platform parsing
-
-  </blockquote>
-
-
-  **Open source: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Parsing...
 d5a73b0c7f2f: Upload
 d6fa702190b6: Set Default Parsing Mode

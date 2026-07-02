@@ -6,6 +6,39 @@
   compartilhados **'
 30364e475d07: Esta não é a sua operação
 3065ed13e5f9: Obter link original
+32327b34a026: '**Envie o link de compartilhamento para análise**
+
+
+  **Plataformas suportadas:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Lista de comandos:**
+
+  <blockquote expandable>/jx <link> - Analisa e envia mídia
+
+  /raw <link> - Não processa mídia, envia arquivo original
+
+  /zip <link> - Não processa mídia, salva resultado da análise, envia arquivo compactado
+
+  /jxjx <link> - Ignora cache, analisa e envia mídia
+
+  /lang - Seleciona idioma
+
+  /mode - Define modo padrão de análise
+
+  /switches - Outras opções
+
+  /switch_auto_delete - Ativa/Desativa exclusão automática de mensagens com links
+  de compartilhamento
+
+  /switch_platform - Ativa/Desativa análise de plataforma
+
+  </blockquote>
+
+
+  **Código aberto: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Ativar/Desativar análise da plataforma
 44a77d4ad4ca: Sem título
 460ce129a523: Baixando...
@@ -39,37 +72,6 @@ b8918b19e2a1: '**▎Ativar / Desativar análise da plataforma**'
 b8a95e74574c: Não processar mídia, enviar arquivo original
 c039b80e17dd: Análise agregada
 c1ecedab11bc: Original
-cf7e2e342196: '**Envie o link de compartilhamento para análise**
-
-
-  **Plataformas suportadas:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Lista de comandos:**
-
-  <blockquote expandable>/jx <link> - Analisar e enviar mídia
-
-  /raw <link> - Não processar mídia, enviar arquivo original
-
-  /zip <link> - Não processar mídia, salvar resultado da análise, enviar arquivo compactado
-
-  /lang - Selecionar idioma
-
-  /mode - Definir modo padrão de análise
-
-  /switches - Outras opções
-
-  /switch_auto_delete - Ativar/Desativar exclusão automática de mensagens de link
-  de compartilhamento
-
-  /switch_platform - Ativar/Desativar análise por plataforma
-
-  </blockquote>
-
-
-  **Código aberto: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Analisando...
 d5a73b0c7f2f: Enviar
 d6fa702190b6: Definir modo padrão de análise

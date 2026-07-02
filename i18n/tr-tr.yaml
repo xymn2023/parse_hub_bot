@@ -5,6 +5,40 @@
 2b256f16d436: '** ▎{status} otomatik olarak paylaşılan bağlantı mesajı silindi **'
 30364e475d07: Bu senin işlemin değil
 3065ed13e5f9: Orijinal bağlantıyı al
+32327b34a026: '**Paylaşım bağlantısını çözümlemek için gönderin**
+
+
+  **Desteklenen platformlar:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Komut listesi:**
+
+  <blockquote expandable>/jx <bağlantı> - Medyayı çözümle ve gönder
+
+  /raw <bağlantı> - Medyayı işlemeyin, ham dosyayı gönder
+
+  /zip <bağlantı> - Medyayı işlemeyin, çözümleme sonucunu kaydet ve sıkıştırılmış
+  dosya olarak gönder
+
+  /jxjx <bağlantı> - Önbelleği atlayarak medyayı çözümle ve gönder
+
+  /lang - Dil seçimi
+
+  /mode - Varsayılan çözümleme modunu ayarla
+
+  /switches - Diğer işlev anahtarları
+
+  /switch_auto_delete - Paylaşım bağlantısı mesajlarının otomatik silinmesini etkinleştir/devre
+  dışı bırak
+
+  /switch_platform - Platform çözümlemeyi etkinleştir/devre dışı bırak
+
+  </blockquote>
+
+
+  **Açık kaynak adresi: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Platform çözümlemeyi etkinleştir/devre dışı bırak
 44a77d4ad4ca: Başlıksız
 460ce129a523: İndiriliyor...
@@ -46,38 +80,6 @@ b8918b19e2a1: '**▎Platform çözümlemeyi etkinleştir/devre dışı bırak**'
 b8a95e74574c: Medya işlenmeyecek, orijinal dosya gönderilecek
 c039b80e17dd: Toplu çözümleme
 c1ecedab11bc: Orijinal
-cf7e2e342196: '**Çözümleme için paylaşım bağlantısını gönderin**
-
-
-  **Desteklenen platformlar:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Komut listesi:**
-
-  <blockquote expandable>/jx <bağlantı> - Medyayı çözümle ve gönder
-
-  /raw <bağlantı> - Medyayı işlemeye gerek yok, orijinal dosyayı gönder
-
-  /zip <bağlantı> - Medyayı işlemeye gerek yok, çözümleme sonucunu kaydet, sıkıştırılmış
-  dosyayı gönder
-
-  /lang - Dil seç
-
-  /mode - Varsayılan çözümleme modunu ayarla
-
-  /switches - Diğer işlev anahtarları
-
-  /switch_auto_delete - Paylaşım bağlantısı mesajlarının otomatik silinmesini etkinleştir/devre
-  dışı bırak
-
-  /switch_platform - Platform çözümlemeyi etkinleştir/devre dışı bırak
-
-  </blockquote>
-
-
-  **Açık kaynak adresi: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Çözülüyor...
 d5a73b0c7f2f: Yükle
 d6fa702190b6: Varsayılan çözümleme modunu ayarla

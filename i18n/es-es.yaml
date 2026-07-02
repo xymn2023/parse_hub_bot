@@ -6,6 +6,40 @@
   compartidos **'
 30364e475d07: Esta no es tu acción
 3065ed13e5f9: Obtener enlace original
+32327b34a026: '**Enviar enlace para compartir para análisis**
+
+
+  **Plataformas compatibles:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Lista de comandos:**
+
+  <blockquote expandable>/jx <enlace> - Analizar y enviar medios
+
+  /raw <enlace> - No procesar medios, enviar archivo original
+
+  /zip <enlace> - No procesar medios, guardar resultado del análisis, enviar archivo
+  comprimido
+
+  /jxjx <enlace> - Omitir caché, analizar y enviar medios
+
+  /lang - Seleccionar idioma
+
+  /mode - Configurar modo de análisis predeterminado
+
+  /switches - Otros interruptores de funciones
+
+  /switch_auto_delete - Activar/Desactivar eliminación automática de mensajes con
+  enlaces para compartir
+
+  /switch_platform - Activar/Desactivar análisis de plataforma
+
+  </blockquote>
+
+
+  **Código abierto: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Activar/Desactivar análisis de plataforma
 44a77d4ad4ca: Sin título
 460ce129a523: Descargando...
@@ -47,38 +81,6 @@ b8918b19e2a1: '**▎Activar / Desactivar análisis de plataforma**'
 b8a95e74574c: No procesar medios, enviar archivo original
 c039b80e17dd: Análisis agregado
 c1ecedab11bc: Original
-cf7e2e342196: '**Enviar enlace para compartir para análisis**
-
-
-  **Plataformas compatibles:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Lista de comandos:**
-
-  <blockquote expandable>/jx <enlace> - Analizar y enviar medios
-
-  /raw <enlace> - No procesar medios, enviar archivo original
-
-  /zip <enlace> - No procesar medios, guardar resultado del análisis, enviar archivo
-  comprimido
-
-  /lang - Seleccionar idioma
-
-  /mode - Configurar modo de análisis predeterminado
-
-  /switches - Otros interruptores de funciones
-
-  /switch_auto_delete - Activar/desactivar eliminación automática de mensajes con
-  enlaces para compartir
-
-  /switch_platform - Activar/desactivar análisis de plataforma
-
-  </blockquote>
-
-
-  **Código abierto: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Analizando...
 d5a73b0c7f2f: Subir
 d6fa702190b6: Establecer modo de análisis predeterminado

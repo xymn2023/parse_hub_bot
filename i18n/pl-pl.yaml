@@ -5,6 +5,39 @@
 2b256f16d436: '** ▎Automatycznie usunięto {status} wiadomości z linkami do udostępniania**'
 30364e475d07: To nie jest twoja operacja
 3065ed13e5f9: Pobierz oryginalny link
+32327b34a026: '**Wyślij link do udostępnienia, aby go przeanalizować**
+
+
+  **Obsługiwane platformy:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Lista poleceń:**
+
+  <blockquote expandable>/jx <link> - analizuj i wyślij media
+
+  /raw <link> - nie przetwarzaj mediów, wyślij oryginalny plik
+
+  /zip <link> - nie przetwarzaj mediów, zapisz wynik analizy, wyślij archiwum
+
+  /jxjx <link> - pomiń pamięć podręczną, analizuj i wyślij media
+
+  /lang - wybierz język
+
+  /mode - ustaw domyślny tryb analizy
+
+  /switches - inne przełączniki funkcji
+
+  /switch_auto_delete - włącz/wyłącz automatyczne usuwanie wiadomości z linkiem do
+  udostępnienia
+
+  /switch_platform - włącz/wyłącz analizę platformy
+
+  </blockquote>
+
+
+  **Kod źródłowy: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Włącz/Wyłącz analizę platformy
 44a77d4ad4ca: Bez tytułu
 460ce129a523: Pobieranie...
@@ -46,37 +79,6 @@ b8918b19e2a1: '**▎Włącz / Wyłącz analizę platformy**'
 b8a95e74574c: Nie przetwarzaj mediów, wyślij oryginalny plik
 c039b80e17dd: Agreguj analizę
 c1ecedab11bc: Oryginalny
-cf7e2e342196: '**Wyślij link do udostępnienia, aby go przeanalizować**
-
-
-  **Obsługiwane platformy:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Lista poleceń:**
-
-  <blockquote expandable>/jx <link> - analizuj i wyślij media
-
-  /raw <link> - nie przetwarzaj mediów, wyślij oryginalny plik
-
-  /zip <link> - nie przetwarzaj mediów, zapisz wynik analizy, wyślij archiwum
-
-  /lang - wybierz język
-
-  /mode - ustaw domyślny tryb analizy
-
-  /switches - inne przełączniki funkcji
-
-  /switch_auto_delete - włącz/wyłącz automatyczne usuwanie wiadomości z linkiem do
-  udostępnienia
-
-  /switch_platform - włącz/wyłącz analizę platformy
-
-  </blockquote>
-
-
-  **Adres źródłowy: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Analizowanie...
 d5a73b0c7f2f: Przesyłanie
 d6fa702190b6: Ustaw domyślny tryb analizy

@@ -5,6 +5,38 @@
 2b256f16d436: '** ▎已 {status} 自動刪除分享連結訊息 **'
 30364e475d07: 這不是你的操作
 3065ed13e5f9: 獲取原始連結
+32327b34a026: '**發送分享連結以進行解析**
+
+
+  **支援的平台:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **指令列表:**
+
+  <blockquote expandable>/jx <連結> - 解析並發送媒體
+
+  /raw <連結> - 不處理媒體，發送原始檔案
+
+  /zip <連結> - 不處理媒體，保存解析結果，發送壓縮包
+
+  /jxjx <連結> - 繞過快取解析並發送媒體
+
+  /lang - 選擇語言
+
+  /mode - 設定預設解析模式
+
+  /switches - 其他功能開關
+
+  /switch_auto_delete - 啟用/停用 自動刪除分享連結訊息
+
+  /switch_platform - 啟用/停用 平台解析
+
+  </blockquote>
+
+
+  **開源地址: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: 啟用/禁用 平台解析
 44a77d4ad4ca: 無標題
 460ce129a523: 下 載 中...
@@ -43,36 +75,6 @@ b8918b19e2a1: '**▎啟用 / 禁用 平台解析**'
 b8a95e74574c: 不處理媒體，發送原始文件
 c039b80e17dd: 聚合解析
 c1ecedab11bc: 原始
-cf7e2e342196: '**發送分享連結以進行解析**
-
-
-  **支持的平台:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **命令列表:**
-
-  <blockquote expandable>/jx <連結> - 解析並發送媒體
-
-  /raw <連結> - 不處理媒體，發送原始檔案
-
-  /zip <連結> - 不處理媒體，保存解析結果，發送壓縮包
-
-  /lang - 選擇語言
-
-  /mode - 設定預設解析模式
-
-  /switches - 其他功能開關
-
-  /switch_auto_delete - 啟用/禁用 自動刪除分享連結訊息
-
-  /switch_platform - 啟用/禁用 平台解析
-
-  </blockquote>
-
-
-  **開源地址: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: 解 析 中...
 d5a73b0c7f2f: 上傳
 d6fa702190b6: 設定預設解析模式

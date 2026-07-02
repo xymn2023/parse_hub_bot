@@ -5,6 +5,38 @@
 2b256f16d436: '** ▎이미 {status} 자동 삭제된 공유 링크 메시지 **'
 30364e475d07: 이것은 당신의 작업이 아닙니다
 3065ed13e5f9: 원본 링크 가져오기
+32327b34a026: '**공유 링크를 보내어 분석하기**
+
+
+  **지원 플랫폼:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **명령어 목록:**
+
+  <blockquote expandable>/jx <링크> - 미디어를 분석하고 전송
+
+  /raw <링크> - 미디어 처리 없이 원본 파일 전송
+
+  /zip <링크> - 미디어 처리 없이 분석 결과 저장 후 압축 파일 전송
+
+  /jxjx <링크> - 캐시를 우회하여 미디어 분석 및 전송
+
+  /lang - 언어 선택
+
+  /mode - 기본 분석 모드 설정
+
+  /switches - 기타 기능 스위치
+
+  /switch_auto_delete - 공유 링크 메시지 자동 삭제 활성화/비활성화
+
+  /switch_platform - 플랫폼 분석 활성화/비활성화
+
+  </blockquote>
+
+
+  **오픈소스 주소: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: 플랫폼 분석 활성화/비활성화
 44a77d4ad4ca: 제목 없음
 460ce129a523: 다운로드 중...
@@ -36,36 +68,6 @@ b8918b19e2a1: '**▎플랫폼 분석 활성화 / 비활성화**'
 b8a95e74574c: 미디어를 처리하지 않고 원본 파일 전송
 c039b80e17dd: 통합 분석
 c1ecedab11bc: 원본
-cf7e2e342196: '**공유 링크를 보내어 분석하기**
-
-
-  **지원 플랫폼:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **명령어 목록:**
-
-  <blockquote expandable>/jx <링크> - 미디어를 분석하고 전송
-
-  /raw <링크> - 미디어 처리 없이 원본 파일 전송
-
-  /zip <링크> - 미디어 처리 없이 분석 결과 저장, 압축 파일 전송
-
-  /lang - 언어 선택
-
-  /mode - 기본 분석 모드 설정
-
-  /switches - 기타 기능 스위치
-
-  /switch_auto_delete - 공유 링크 메시지 자동 삭제 활성화/비활성화
-
-  /switch_platform - 플랫폼 분석 활성화/비활성화
-
-  </blockquote>
-
-
-  **오픈소스 주소: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: 분석 중...
 d5a73b0c7f2f: 업로드
 d6fa702190b6: 기본 파싱 모드 설정

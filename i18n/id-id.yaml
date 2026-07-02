@@ -5,6 +5,39 @@
 2b256f16d436: '** ▎Sudah {status} pesan tautan berbagi yang dihapus otomatis **'
 30364e475d07: Ini bukan tindakan Anda
 3065ed13e5f9: Dapatkan tautan asli
+32327b34a026: '**Kirim tautan berbagi untuk diurai**
+
+
+  **Platform yang didukung:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Daftar perintah:**
+
+  <blockquote expandable>/jx <tautan> - Mengurai dan mengirim media
+
+  /raw <tautan> - Tidak memproses media, mengirim file asli
+
+  /zip <tautan> - Tidak memproses media, menyimpan hasil penguraian, mengirim paket
+  zip
+
+  /jxjx <tautan> - Melewati cache, mengurai dan mengirim media
+
+  /lang - Pilih bahasa
+
+  /mode - Atur mode penguraian default
+
+  /switches - Saklar fungsi lainnya
+
+  /switch_auto_delete - Aktifkan/nonaktifkan penghapusan otomatis pesan tautan berbagi
+
+  /switch_platform - Aktifkan/nonaktifkan penguraian platform
+
+  </blockquote>
+
+
+  **Alamat sumber terbuka: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Aktifkan/Nonaktifkan pemrosesan platform
 44a77d4ad4ca: Tanpa judul
 460ce129a523: Sedang mengunduh...
@@ -47,37 +80,6 @@ b8918b19e2a1: '**▎Aktifkan / Nonaktifkan pemrosesan platform**'
 b8a95e74574c: Jangan proses media, kirim file asli
 c039b80e17dd: Pemrosesan agregat
 c1ecedab11bc: Asli
-cf7e2e342196: '**Kirim tautan berbagi untuk diurai**
-
-
-  **Platform yang didukung:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Daftar perintah:**
-
-  <blockquote expandable>/jx <tautan> - Mengurai dan mengirim media
-
-  /raw <tautan> - Tidak memproses media, mengirim file asli
-
-  /zip <tautan> - Tidak memproses media, menyimpan hasil penguraian, mengirim paket
-  terkompresi
-
-  /lang - Pilih bahasa
-
-  /mode - Atur mode penguraian default
-
-  /switches - Saklar fungsi lainnya
-
-  /switch_auto_delete - Aktifkan/nonaktifkan penghapusan otomatis pesan tautan berbagi
-
-  /switch_platform - Aktifkan/nonaktifkan penguraian platform
-
-  </blockquote>
-
-
-  **Alamat sumber terbuka: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Sedang memproses...
 d5a73b0c7f2f: Unggah
 d6fa702190b6: Atur mode penguraian default

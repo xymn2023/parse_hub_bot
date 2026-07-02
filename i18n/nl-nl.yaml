@@ -6,6 +6,39 @@
 2b256f16d436: '** ▎{status} automatisch verwijderde gedeelde linkberichten **'
 30364e475d07: Dit is niet jouw actie
 3065ed13e5f9: Oorspronkelijke link ophalen
+32327b34a026: '**Verzend de deel-link voor analyse**
+
+
+  **Ondersteunde platforms:**
+
+  <blockquote expandable>{get_supported_platforms()}</blockquote>
+
+
+  **Lijst met commando''s:**
+
+  <blockquote expandable>/jx <link> - Analyseer en verzend media
+
+  /raw <link> - Verwerk media niet, verzend het originele bestand
+
+  /zip <link> - Verwerk media niet, sla de analyse op en verzend een gecomprimeerd
+  pakket
+
+  /jxjx <link> - Omzeil cache, analyseer en verzend media
+
+  /lang - Kies taal
+
+  /mode - Stel de standaard analysemode in
+
+  /switches - Andere functiewisselaars
+
+  /switch_auto_delete - Schakel automatisch verwijderen van deel-link berichten in/uit
+
+  /switch_platform - Schakel platformanalyse in/uit
+
+  </blockquote>
+
+
+  **Open source locatie: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 36c680f6f5b0: Platformontleding in-/uitschakelen
 44a77d4ad4ca: Geen titel
 460ce129a523: Bezig met downloaden...
@@ -48,38 +81,6 @@ b8918b19e2a1: '**▎Platformontleding in-/uitschakelen**'
 b8a95e74574c: Media niet verwerken, originele bestanden verzenden
 c039b80e17dd: Geaggregeerde ontleding
 c1ecedab11bc: Origineel
-cf7e2e342196: '**Deel de link om te ontleden**
-
-
-  **Ondersteunde platforms:**
-
-  <blockquote expandable>{get_supported_platforms()}</blockquote>
-
-
-  **Lijst met commando''s:**
-
-  <blockquote expandable>/jx <link> - Ontleed en verzend media
-
-  /raw <link> - Verwerk media niet, verzend het originele bestand
-
-  /zip <link> - Verwerk media niet, sla het ontledingsresultaat op, verzend een gecomprimeerd
-  pakket
-
-  /lang - Kies taal
-
-  /mode - Stel de standaard ontledingsmodus in
-
-  /switches - Andere functiewisselaars
-
-  /switch_auto_delete - Schakel automatisch verwijderen van gedeelde linkberichten
-  in/uit
-
-  /switch_platform - Schakel platformontleding in/uit
-
-  </blockquote>
-
-
-  **Open source locatie: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
 d59c948c471c: Bezig met ontleden...
 d5a73b0c7f2f: Uploaden
 d6fa702190b6: Stel de standaard parse-modus in
