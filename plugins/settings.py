@@ -215,25 +215,33 @@ def build_switches_button(current: AccountContext) -> Ikm:
     def reply_bool_style(v: bool) -> ButtonStyle:
         return ButtonStyle.SUCCESS if v else ButtonStyle.DANGER
 
+    def cq(v: str) -> str:
+        return CQData(key=key, value=v, uid=uid).unparse()
+
     return Ikm(
         [
             [
                 Ikb(
                     _t("内联发送原始 URL 选项"),
-                    callback_data=CQData(key=key, value="enable_inline_raw_url", uid=uid).unparse(),
+                    callback_data=cq("enable_inline_raw_url"),
                     style=reply_bool_style(config.enable_inline_raw_url),
                 ),
                 Ikb(
                     _t("保留错误日志"),
-                    callback_data=CQData(key=key, value="keep_error_log", uid=uid).unparse(),
+                    callback_data=cq("keep_error_log"),
                     style=reply_bool_style(config.keep_error_log),
                 ),
             ],
             [
                 Ikb(
                     _t("隐藏底部 Source 超链接"),
-                    callback_data=CQData(key=key, value="hide_source", uid=uid).unparse(),
+                    callback_data=cq("hide_source"),
                     style=reply_bool_style(config.hide_source),
+                ),
+                Ikb(
+                    _t("隐藏解析进度"),
+                    callback_data=cq("noprogress"),
+                    style=reply_bool_style(config.noprogress),
                 ),
             ],
         ]
@@ -274,5 +282,7 @@ async def switches_callback(_: Client, cq: CallbackQuery) -> None:
                 current = await account.patch_config(keep_error_log=not config.keep_error_log)
             case "hide_source":
                 current = await account.patch_config(hide_source=not config.hide_source)
+            case "noprogress":
+                current = await account.patch_config(noprogress=not config.noprogress)
 
     await cq.message.edit_reply_markup(reply_markup=build_switches_button(current))

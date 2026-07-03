@@ -84,6 +84,8 @@ class MessageStatusReporter(StatusReporter):
         self._user_config = user_config
 
     async def report(self, text: str) -> None:
+        if self._user_config.noprogress:
+            return
         await self._edit_text(f"**▎{text}**")
 
     async def report_error(self, stage: str, error: Exception) -> None:

@@ -18,6 +18,7 @@ class UserConfig(BaseModel):
     enable_inline_raw_url: bool = Field(default=False, description="启用内联模式的发送原始 URL 功能")
     keep_error_log: bool = Field(default=False, description="保留错误日志")
     hide_source: bool = Field(default=False, description="隐藏底部 Source 超链接")
+    noprogress: bool = Field(default=False, description="禁用解析进度, 直接发送结果")
 
     def __str__(self) -> str:
         return self.model_dump_json(indent=4, ensure_ascii=True)
@@ -30,6 +31,7 @@ class UserConfigPatch(TypedDict, total=False):
     enable_inline_raw_url: bool
     keep_error_log: bool
     hide_source: bool
+    noprogress: bool
 
 
 DEFAULT_USER_CONFIG = UserConfig()
