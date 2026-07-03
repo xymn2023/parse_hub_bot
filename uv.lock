@@ -1486,7 +1486,7 @@ wheels = [
 
 [[package]]
 name = "parsehub"
-version = "2.0.34"
+version = "2.0.38"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -1510,7 +1510,7 @@ dependencies = [
     { name = "yt-dlp", extra = ["default"] },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/93/6f1ab4964272475c4fa370184c44dd874fcfe5797ec90f3c69819473e979/parsehub-2.0.34-py3-none-any.whl", hash = "sha256:801b3f2933f1c03c087d3c5d4562f18076c574c41ec6a65e051fe97498039893", size = 106833, upload-time = "2026-07-03T03:58:45.015Z" },
+    { url = "https://files.pythonhosted.org/packages/f7/8a/89f1e94c1e33e5cb19ea03d518f37758fd4f3b58068574397762817f9a6d/parsehub-2.0.38-py3-none-any.whl", hash = "sha256:b524e062d48c00e9d2e9ac1a8d52af8217842269ae07bd84d691e925b97bf0e2", size = 106880, upload-time = "2026-07-03T06:04:35.587Z" },
 ]
 
 [[package]]

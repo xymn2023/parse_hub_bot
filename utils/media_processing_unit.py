@@ -5,6 +5,7 @@ import json
 import math
 import mimetypes
 import os
+import subprocess
 import time
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -72,13 +73,13 @@ class MediaProcessingUnit:
     # ------------------------------------------------------------------ #
 
     async def process_image(self, file_path: Path) -> MediaProcessResult:
-        ext = file_path.suffix.lower()
-        needs_convert = ext in {".heif", ".heic", ".avif"}
+        image_format = self._detect_image_format(file_path)
+        needs_convert = image_format in {"HEIF", "HEIC", "AVIF", "WEBP"}
         intermediates: list[Path] = []  # 统一收集中间文件
 
         try:
             if needs_convert:
-                self.logger(f"图片格式需转换: {ext} -> png")
+                self.logger(f"图片格式需转换: {image_format.lower()} -> png")
                 source = await asyncio.to_thread(self._img2png, file_path)
                 intermediates.append(source)
             else:
@@ -99,6 +100,40 @@ class MediaProcessingUnit:
                 if p.exists():
                     self.logger(f"删除中间文件: {p}")
                     os.remove(p)
+
+    @staticmethod
+    def _detect_image_format(file_path: Path) -> str:
+        """避免图片特殊编码, 不直接用 PIL 读取"""
+        with file_path.open("rb") as f:
+            header = f.read(32)
+
+        if header.startswith(b"RIFF") and header[8:12] == b"WEBP":
+            return "WEBP"
+        if header.startswith(b"\xff\xd8\xff"):
+            return "JPEG"
+        if header.startswith(b"\x89PNG\r\n\x1a\n"):
+            return "PNG"
+        if header[:6] in {b"GIF87a", b"GIF89a"}:
+            return "GIF"
+        if (
+            len(header) >= 12
+            and header[4:8] == b"ftyp"
+            and header[8:12]
+            in {
+                b"avif",
+                b"avis",
+                b"heic",
+                b"heix",
+                b"hevc",
+                b"hevx",
+                b"mif1",
+                b"msf1",
+            }
+        ):
+            return header[8:12].decode("ascii").upper()
+
+        with Image.open(file_path) as img:
+            return (img.format or "").upper()
 
     def _adapt_image(self, file_path: Path) -> MediaProcessResult | None:
         """分析图片尺寸并做填充 / 切割，返回 None 表示无需处理"""
@@ -135,11 +170,16 @@ class MediaProcessingUnit:
             return self._split_image(file_path, seg_h)
 
     def _img2png(self, file_path: Path) -> Path:
-        with Image.open(file_path) as pil_img:
-            img = pil_img.convert("RGBA") if pil_img.mode != "RGBA" else pil_img
-            output = self.output_dir / file_path.with_suffix(".png").name
-            img.save(output, format="PNG")
-        self.logger(f"webp 转换完成: {output}")
+        output = self.output_dir / file_path.with_suffix(".png").name
+        try:
+            with Image.open(file_path) as pil_img:
+                img = pil_img.convert("RGBA") if pil_img.mode != "RGBA" else pil_img
+                img.save(output, format="PNG")
+        except OSError as e:
+            self.logger(f"Pillow 转换失败，尝试 ffmpeg: {e}")
+            cmd = ["ffmpeg", "-v", "error", "-i", str(file_path), "-frames:v", "1", "-y", str(output)]
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        self.logger(f"图片转换完成: {output}")
         return output
 
     def _downscale_image(self, file_path: Path, max_side: int = 2560) -> Path | None:
