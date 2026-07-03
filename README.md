@@ -58,6 +58,7 @@
 | **皮皮虾**         | ✅  | ✅  |       |
 | **最右**          | ✅  | ✅  |       |
 | **小黑盒**         | ✅  | ✅  |       |
+| **Snapchat**         | ✅  |   |       |
 
 > 🔧 更多平台持续接入中...
 
@@ -172,6 +173,7 @@ platforms:
 | `pipixia`   | 皮皮虾         |
 | `zuiyou`    | 最右          |
 | `xiaoheihe` | 小黑盒         |
+| `snapchat`  | Snapchat         |
 
 ### 🍪 支持 Cookie 的平台
 
