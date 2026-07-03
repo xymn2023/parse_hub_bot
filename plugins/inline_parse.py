@@ -373,7 +373,7 @@ async def inline_result_download(cli: Client, chosen_result: ChosenInlineResult)
 
     caption = build_caption(cached_result, hide_source=current.config.hide_source) if cached_result else ""
     reporter = InlineStatusReporter(cli, inline_message_id, caption, _t=_t, user_config=current.config)
-    pipeline = ParsePipeline(query, reporter, parse_result=cached_result, singleflight=False, _t=_t)
+    pipeline = ParsePipeline(raw_url, reporter, parse_result=cached_result, singleflight=False, _t=_t)
     if (result := await pipeline.run()) is None:
         return
 

@@ -294,7 +294,7 @@ async def handle_parse(
 
     cached_parse_result = None if bypass_cache else await parse_cache.get(raw_url)
     pipeline = ParsePipeline(
-        url,
+        raw_url,
         reporter,
         parse_result=cached_parse_result,
         singleflight=singleflight,
