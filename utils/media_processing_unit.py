@@ -72,14 +72,15 @@ class MediaProcessingUnit:
     # ------------------------------------------------------------------ #
 
     async def process_image(self, file_path: Path) -> MediaProcessResult:
-        image_format, is_broken = await self._detect_image_format(file_path)
+        image_format, is_broken, image_mode = await self._detect_image_format(file_path)
         needs_convert = image_format not in {"PNG", "JPEG"}
+        needs_rgb = image_mode == "RGBA"
         source = file_path
         intermediates: list[Path] = []  # 统一收集中间文件
 
         try:
-            if needs_convert or is_broken:
-                self.logger(f"图片需转换: format={image_format}, broken={is_broken}")
+            if needs_convert or is_broken or needs_rgb:
+                self.logger(f"图片需转换: format={image_format}, mode={image_mode}, broken={is_broken}")
                 source = await self._img2jpg(file_path)
                 intermediates.append(source)
 
@@ -100,12 +101,12 @@ class MediaProcessingUnit:
                     os.remove(p)
 
     @staticmethod
-    async def _detect_image_format(file_path: Path) -> tuple[str, bool]:
+    async def _detect_image_format(file_path: Path) -> tuple[str, bool, str]:
         try:
             with Image.open(file_path) as img:
-                return (img.format or "").upper(), False
+                return (img.format or "").upper(), False, img.mode
         except OSError:
-            return await MediaProcessingUnit._probe_image_format(file_path), True
+            return await MediaProcessingUnit._probe_image_format(file_path), True, ""
 
     @staticmethod
     async def _probe_image_format(file_path: Path) -> str:
