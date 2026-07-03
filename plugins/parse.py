@@ -701,7 +701,7 @@ async def _send_multi(
         ]
         for document_batch in batched(input_documents, 10):
             if document_batch[-1] == input_documents[-1]:
-                document_batch[0].caption = caption
+                document_batch[-1].caption = caption
 
             await msg.reply_chat_action(enums.ChatAction.UPLOAD_DOCUMENT)
             # noinspection PyDefaultArgument
