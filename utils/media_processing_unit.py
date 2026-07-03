@@ -5,7 +5,6 @@ import json
 import math
 import mimetypes
 import os
-import subprocess
 import time
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -73,17 +72,16 @@ class MediaProcessingUnit:
     # ------------------------------------------------------------------ #
 
     async def process_image(self, file_path: Path) -> MediaProcessResult:
-        image_format = self._detect_image_format(file_path)
+        image_format, is_broken = await self._detect_image_format(file_path)
         needs_convert = image_format not in {"PNG", "JPEG"}
+        source = file_path
         intermediates: list[Path] = []  # 统一收集中间文件
 
         try:
-            if needs_convert:
-                self.logger(f"图片格式需转换: {image_format.lower()} -> png")
-                source = await asyncio.to_thread(self._img2png, file_path)
+            if needs_convert or is_broken:
+                self.logger(f"图片需转换: format={image_format}, broken={is_broken}")
+                source = await self._img2jpg(file_path)
                 intermediates.append(source)
-            else:
-                source = file_path
 
             if result := await asyncio.to_thread(self._adapt_image, source):
                 return result
@@ -102,38 +100,30 @@ class MediaProcessingUnit:
                     os.remove(p)
 
     @staticmethod
-    def _detect_image_format(file_path: Path) -> str:
-        """避免图片特殊编码, 不直接用 PIL 读取"""
-        with file_path.open("rb") as f:
-            header = f.read(32)
+    async def _detect_image_format(file_path: Path) -> tuple[str, bool]:
+        try:
+            with Image.open(file_path) as img:
+                return (img.format or "").upper(), False
+        except OSError:
+            return await MediaProcessingUnit._probe_image_format(file_path), True
 
-        if header.startswith(b"RIFF") and header[8:12] == b"WEBP":
-            return "WEBP"
-        if header.startswith(b"\xff\xd8\xff"):
-            return "JPEG"
-        if header.startswith(b"\x89PNG\r\n\x1a\n"):
-            return "PNG"
-        if header[:6] in {b"GIF87a", b"GIF89a"}:
-            return "GIF"
-        if (
-            len(header) >= 12
-            and header[4:8] == b"ftyp"
-            and header[8:12]
-            in {
-                b"avif",
-                b"avis",
-                b"heic",
-                b"heix",
-                b"hevc",
-                b"hevx",
-                b"mif1",
-                b"msf1",
-            }
-        ):
-            return header[8:12].decode("ascii").upper()
-
-        with Image.open(file_path) as img:
-            return (img.format or "").upper()
+    @staticmethod
+    async def _probe_image_format(file_path: Path) -> str:
+        codec = await run_cmd(
+            "ffprobe",
+            "-v",
+            "error",
+            "-select_streams",
+            "v:0",
+            "-show_entries",
+            "stream=codec_name",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(file_path),
+        )
+        return {"mjpeg": "JPEG", "jpeg": "JPEG", "png": "PNG", "webp": "WEBP"}.get(
+            codec.strip().lower(), codec.strip().upper()
+        )
 
     def _adapt_image(self, file_path: Path) -> MediaProcessResult | None:
         """分析图片尺寸并做填充 / 切割，返回 None 表示无需处理"""
@@ -169,16 +159,30 @@ class MediaProcessingUnit:
             self.logger(f"长图切割: segments={segments}, seg_h={seg_h}")
             return self._split_image(file_path, seg_h)
 
-    def _img2png(self, file_path: Path) -> Path:
-        output = self.output_dir / file_path.with_suffix(".png").name
+    async def _img2jpg(self, file_path: Path) -> Path:
+        output = self.output_dir / file_path.with_suffix(".jpg").name
         try:
             with Image.open(file_path) as pil_img:
-                img = pil_img.convert("RGBA") if pil_img.mode != "RGBA" else pil_img
-                img.save(output, format="PNG")
+                img = pil_img.convert("RGB") if pil_img.mode != "RGB" else pil_img
+                img.save(output, format="JPEG")
         except OSError as e:
             self.logger(f"Pillow 转换失败，尝试 ffmpeg: {e}")
-            cmd = ["ffmpeg", "-v", "error", "-i", str(file_path), "-frames:v", "1", "-y", str(output)]
-            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+            await run_cmd(
+                "ffmpeg",
+                "-v",
+                "error",
+                "-i",
+                str(file_path),
+                "-frames:v",
+                "1",
+                "-q:v",
+                "1",
+                "-y",
+                str(output),
+                timeout=60,
+            )
+            if not output.exists() or output.stat().st_size == 0:
+                raise
         self.logger(f"图片转换完成: {output}")
         return output
 

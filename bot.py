@@ -57,7 +57,7 @@ class Bot(Client):
         await super().stop()
         await close_db()
         # 结束时清理下载残留
-        if self.cfg.download_dir.exists():
+        if self.cfg.download_dir.exists() and not self.cfg.debug_skip_cleanup:
             shutil.rmtree(self.cfg.download_dir)
 
     def init_watchdog(self) -> None:
