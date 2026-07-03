@@ -1,3 +1,5 @@
+import os
+
 from easy_ai18n import EasyAI18n
 from easy_ai18n.translator import OpenAIBulkTranslator
 
@@ -50,5 +52,5 @@ if __name__ == "__main__":
     k.pop("zh-hans")
     i18n.build(
         to_locales=list(k.keys()),
-        translator=OpenAIBulkTranslator(model="gpt-4.1-mini"),
+        translator=OpenAIBulkTranslator(model=os.getenv("I18N_MODEL", "gpt-4.1-mini")),
     )
