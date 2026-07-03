@@ -74,7 +74,7 @@ class MediaProcessingUnit:
 
     async def process_image(self, file_path: Path) -> MediaProcessResult:
         image_format = self._detect_image_format(file_path)
-        needs_convert = image_format in {"HEIF", "HEIC", "AVIF", "WEBP"}
+        needs_convert = image_format not in {"PNG", "JPEG"}
         intermediates: list[Path] = []  # 统一收集中间文件
 
         try:
@@ -192,8 +192,8 @@ class MediaProcessingUnit:
             new_w, new_h = int(w * scale), int(h * scale)
             self.logger(f"图片长边超限({max(w, h)}px > {max_side}px)，缩放: {w}x{h} -> {new_w}x{new_h}")
             resized = img.resize((new_w, new_h), Resampling.LANCZOS)
-            ext = (img.format and f".{img.format.lower()}") or file_path.suffix
-            out_path = self.output_dir / f"downscaled_{time.time_ns()}{ext}"
+            ext = file_path.suffix
+            out_path = self.output_dir / f"{file_path.stem}_downscaled{ext}"
             resized.save(out_path)
         return out_path
 
