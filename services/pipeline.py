@@ -76,6 +76,7 @@ class ParsePipeline:
     def __init__(
         self,
         url: str,
+        raw_url: str,
         reporter: StatusReporter,
         parse_result: AnyParseResult | None = None,
         *,
@@ -86,7 +87,12 @@ class ParsePipeline:
         save_metadata: bool = False,
         _t: PreLocaleSelector,
     ):
+        """
+        :param url: 未清理的 URL
+        :param raw_url: 原始 URL，当做 KEY
+        """
         self._url = url
+        self._raw_url = raw_url
         self._reporter = reporter
         self._parse_result = parse_result
         self._waited = False
@@ -111,7 +117,7 @@ class ParsePipeline:
     async def run(self) -> PipelineResult | None:
         """执行流水线，返回 PipelineResult 或 None（失败时已通知）"""
         if self._singleflight:
-            key = self._url
+            key = self._raw_url
             existing = _inflight.get(key)
 
             if existing is not None:
