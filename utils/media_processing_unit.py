@@ -73,6 +73,9 @@ class MediaProcessingUnit:
 
     async def process_image(self, file_path: Path) -> MediaProcessResult:
         image_format, is_broken, image_mode = await self._detect_image_format(file_path)
+        if image_format == "GIF":
+            self.logger("图片为 GIF 格式，无需处理")
+            return MediaProcessResult(output_paths=[file_path])
         needs_convert = image_format not in {"PNG", "JPEG"}
         needs_rgb = image_mode == "RGBA"
         source = file_path
