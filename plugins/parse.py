@@ -29,7 +29,7 @@ from core import bs
 from db import get_session
 from i18n import t_
 from log import logger
-from plugins.filters import platform_filter, via_me_filter
+from plugins.filters import forwarded_from_bot_filter, platform_filter, via_me_filter
 from plugins.helpers import (
     ProcessedMedia,
     build_caption,
@@ -127,7 +127,7 @@ class MessageStatusReporter(StatusReporter):
 
 @Client.on_message(
     filters.command(["jx", "jxjx", "raw", "zip"])
-    | ((filters.text | filters.caption) & ~via_me_filter & platform_filter(True))
+    | ((filters.text | filters.caption) & ~via_me_filter & platform_filter(True) & ~forwarded_from_bot_filter)
 )
 async def jx(cli: Client, msg: Message) -> None:
     mode = "preview"

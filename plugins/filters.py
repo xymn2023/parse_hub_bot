@@ -1,7 +1,7 @@
 from typing import Any
 
 from pyrogram import filters
-from pyrogram.types import InlineQuery, Message
+from pyrogram.types import InlineQuery, Message, User
 
 from db.session import get_session
 from services import AccountService, ParseService
@@ -53,3 +53,13 @@ async def _via_me(_: Any, __: Any, update: Message) -> bool:
 
 
 via_me_filter = filters.create(_via_me)
+
+
+async def _forwarded_from_bot(_: Any, __: Any, update: Message) -> bool:
+    sender_user: User | None = getattr(update.forward_origin, "sender_user", None)
+    if sender_user and sender_user.is_bot:
+        return True
+    return False
+
+
+forwarded_from_bot_filter = filters.create(_forwarded_from_bot)
