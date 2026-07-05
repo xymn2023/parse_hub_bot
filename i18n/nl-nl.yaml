@@ -39,6 +39,7 @@
 
 
   **Open source locatie: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
+34f3f7d5372a: '**▎GIF downloadlink**'
 36c680f6f5b0: Platformontleding in-/uitschakelen
 44a77d4ad4ca: Geen titel
 460ce129a523: Bezig met downloaden...
@@ -72,6 +73,7 @@
 8c028b35f75a: '**▎Overgeschakeld naar: {MODE_MAP[selected]}**'
 8f555aa82c87: Originele link
 929107a1e13c: '**▎Voeg een link toe of beantwoord een bericht**'
+996ebe10260e: '**▎Te veel GIFs, upload overgeslagen, download zelf**'
 9dbc542be826: Verberg analysevoortgang
 a3e3b88377c8: Start
 a4ce27c8e465: '**▎Functie Schakelaar**'

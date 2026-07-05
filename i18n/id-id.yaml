@@ -38,6 +38,7 @@
 
 
   **Alamat sumber terbuka: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
+34f3f7d5372a: '**▎Tautan Unduhan GIF**'
 36c680f6f5b0: Aktifkan/Nonaktifkan pemrosesan platform
 44a77d4ad4ca: Tanpa judul
 460ce129a523: Sedang mengunduh...
@@ -71,6 +72,7 @@
 8c028b35f75a: '**▎Sudah beralih ke: {MODE_MAP[selected]}**'
 8f555aa82c87: Tautan asli
 929107a1e13c: '**▎Harap tambahkan tautan atau balas sebuah pesan**'
+996ebe10260e: '**▎GIF terlalu banyak, lewati pengunggahan, silakan unduh sendiri**'
 9dbc542be826: Sembunyikan kemajuan parsing
 a3e3b88377c8: Mulai
 a4ce27c8e465: '**▎Sakelar Fitur**'

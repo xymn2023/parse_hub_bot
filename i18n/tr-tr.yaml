@@ -39,6 +39,7 @@
 
 
   **Açık kaynak adresi: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
+34f3f7d5372a: '**▎GIF İndirme Bağlantısı**'
 36c680f6f5b0: Platform çözümlemeyi etkinleştir/devre dışı bırak
 44a77d4ad4ca: Başlıksız
 460ce129a523: İndiriliyor...
@@ -71,6 +72,7 @@
 8c028b35f75a: '**▎Şu an seçili: {MODE_MAP[selected]}**'
 8f555aa82c87: Orijinal bağlantı
 929107a1e13c: '**▎Lütfen bir bağlantı ekleyin veya bir mesaja yanıt verin**'
+996ebe10260e: '**▎GIF Çok Fazla, Yükleme Atlandı, Lütfen Kendiniz İndirin**'
 9dbc542be826: Çözümleme ilerlemesini gizle
 a3e3b88377c8: Başlat
 a4ce27c8e465: '**▎Fonksiyon Anahtarı**'

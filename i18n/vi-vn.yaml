@@ -37,6 +37,7 @@
 
 
   **Địa chỉ mã nguồn mở: [GitHub](https://github.com/z-mio/parse_hub_bot)**'
+34f3f7d5372a: '**▎Liên kết tải xuống GIF**'
 36c680f6f5b0: Bật/Tắt phân tích nền tảng
 44a77d4ad4ca: Không tiêu đề
 460ce129a523: Đang tải xuống...
@@ -67,6 +68,7 @@
 8c028b35f75a: '**▎Đã chuyển sang: {MODE_MAP[selected]}**'
 8f555aa82c87: Liên kết gốc
 929107a1e13c: '**▎Vui lòng thêm liên kết hoặc trả lời một tin nhắn**'
+996ebe10260e: '**▎Quá nhiều GIF, bỏ qua tải lên, vui lòng tự tải xuống**'
 9dbc542be826: Ẩn tiến trình phân tích
 a3e3b88377c8: Bắt đầu
 a4ce27c8e465: '**▎Công tắc chức năng**'

@@ -41,6 +41,7 @@
 
 
   **Code source : [GitHub](https://github.com/z-mio/parse_hub_bot)**'
+34f3f7d5372a: '**▎Lien de téléchargement GIF**'
 36c680f6f5b0: Activer/Désactiver l'analyse de la plateforme
 44a77d4ad4ca: Sans titre
 460ce129a523: Téléchargement en cours...
@@ -74,6 +75,7 @@
 8c028b35f75a: '**▎Passé à : {MODE_MAP[selected]}**'
 8f555aa82c87: Lien original
 929107a1e13c: '**▎Veuillez ajouter un lien ou répondre à un message**'
+996ebe10260e: '**▎Trop de GIF, téléchargement ignoré, veuillez télécharger vous-même**'
 9dbc542be826: Masquer la progression de l'analyse
 a3e3b88377c8: Démarrer
 a4ce27c8e465: '**▎Interrupteur de fonction**'
