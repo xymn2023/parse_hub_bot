@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from itertools import batched
 from typing import Self, cast
 
 from parsehub.types import Platform
@@ -202,7 +203,7 @@ async def switch_platform_callback(_: Client, cq: CallbackQuery) -> None:
         )
         for p in list(Platform)
     ]
-    reply_markup = Ikm([ikbs[i : i + 2] for i in range(0, len(ikbs), 2)])
+    reply_markup = Ikm([list(i) for i in batched(ikbs, 2)])
     await cq.message.edit_reply_markup(reply_markup)
 
 

@@ -7,7 +7,7 @@ from typing import Any, Protocol
 
 from easy_ai18n import PreLocaleSelector
 from parsehub import DownloadResult
-from parsehub.types import AnyParseResult, PostType, ProgressUnit
+from parsehub.types import AniRef, AnyParseResult, PostType, ProgressUnit
 
 from core import bs, pl_cfg
 from log import logger
@@ -83,6 +83,7 @@ class ParsePipeline:
         singleflight: bool = True,
         skip_media_processing: bool = False,
         skip_download_threshold: int = 0,
+        gif_only_skip_download_count_threshold: int = 0,
         richtext_skip_download: bool = True,
         save_metadata: bool = False,
         _t: PreLocaleSelector,
@@ -99,6 +100,7 @@ class ParsePipeline:
         self._singleflight = singleflight
         self._skip_media_processing = skip_media_processing
         self._skip_download_threshold = skip_download_threshold
+        self._gif_only_skip_download_count_threshold = gif_only_skip_download_count_threshold
         self._richtext_skip_download = richtext_skip_download
         self._save_metadata = save_metadata
         self._t = _t
@@ -134,10 +136,12 @@ class ParsePipeline:
         try:
             result = await self._execute()
             if result is None:
-                self.finish()  # 流水线失败，立即释放等待者
+                logger.debug("流水线失败, 立即释放等待者")
+                self.finish()
             return result
         except BaseException:
-            self.finish()  # 流水线异常，立即释放等待者
+            logger.debug("流水线异常, 立即释放等待者")
+            self.finish()
             raise
 
     async def _execute(self) -> PipelineResult | None:
@@ -162,6 +166,15 @@ class ParsePipeline:
             logger.debug(
                 f"媒体数量({len(to_list(parse_result.media))})大于设定值({self._skip_download_threshold}), 跳过下载"
             )
+            return PipelineResult(parse_result=parse_result)
+
+        gif_count = len([i for i in to_list(parse_result.media) if isinstance(i, AniRef)])
+        if (
+            self._gif_only_skip_download_count_threshold
+            and gif_count > self._gif_only_skip_download_count_threshold
+            and gif_count == len(to_list(parse_result.media))
+        ):
+            logger.debug(f"GIF ({gif_count})大于设定值({self._gif_only_skip_download_count_threshold}), 跳过下载")
             return PipelineResult(parse_result=parse_result)
 
         # ── 2. 下载 ──
@@ -189,7 +202,7 @@ class ParsePipeline:
         # ── 3. 媒体处理 ──
         if self._skip_media_processing:
             logger.debug(f"流水线完成: download_result={download_result}")
-            processed_list = [ProcessedMedia(i, [i.path]) for i in to_list(download_result.media)]
+            processed_list = [ProcessedMedia(i, [Path(i.path)]) for i in to_list(download_result.media)]
             return PipelineResult(
                 parse_result=parse_result, processed_list=processed_list, output_dir=download_result.output_dir
             )

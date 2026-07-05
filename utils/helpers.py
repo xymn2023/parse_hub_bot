@@ -4,7 +4,7 @@ import tarfile
 import uuid
 from collections.abc import Awaitable, Callable, Sequence
 from pathlib import Path
-from typing import Any, overload
+from typing import Any
 
 from log import logger
 
@@ -23,14 +23,6 @@ async def run_cmd(*cmd: str, timeout: float = 30) -> str:
         await proc.wait()
         return ""
     return stdout.decode().strip()
-
-
-@overload
-def to_list[T](v: Sequence[T]) -> Sequence[T]: ...
-
-
-@overload
-def to_list[T](v: T) -> Sequence[T]: ...
 
 
 def to_list[T](v: T | Sequence[T]) -> Sequence[T]:
