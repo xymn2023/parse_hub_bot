@@ -372,6 +372,7 @@ async def handle_parse(
                 link_preview_options=LinkPreviewOptions(is_disabled=True),
             )
         )
+        await reporter.dismiss()
         pipeline.finish()
         return
 
